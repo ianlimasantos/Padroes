@@ -59,7 +59,7 @@ public class App {
 	
 	
 	public static void main(String[] args) throws IllegalAccessException {
-		System.out.println("Ian é viado");
+		System.out.println("Ian é viado!!!");
 		App app = new App();
 		app.runQ1();
 	}
