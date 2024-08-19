@@ -49,8 +49,13 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 		return this.conteudo;
 	};
 
+	protected String getConteudo() {
+		return conteudo;
+	}
+	
 	protected void setConteudo(String conteudo) {
 		this.conteudo = conteudo;
 	}
+	
 
 }

@@ -8,6 +8,8 @@ import br.ifba.inf011.aval2.model.Credencial;
 import br.ifba.inf011.aval2.model.Entrada;
 import br.ifba.inf011.aval2.model.EntradaOperavel;
 import br.ifba.inf011.aval2.model.Pasta;
+import br.ifba.inf011.aval2.model.Memento.ArquivoHistorico;
+import br.ifba.inf011.aval2.model.Memento.Caretaker;
 import br.ifba.inf011.aval2.model.Stratagy.ConversorBinario;
 import br.ifba.inf011.aval2.model.Stratagy.ConversorContext;
 import br.ifba.inf011.aval2.model.Stratagy.ConversorHexa;
@@ -43,18 +45,34 @@ public class App {
 		ConversorOctal conversorOctal = new ConversorOctal();
 		ConversorHexa conversorHexa = new ConversorHexa();
 		
-		System.out.println("\n---------- Binario -----------");
-
-		ConversorContext binario = new ConversorContext(conversorBinario); 
-		System.out.println(binario.converterString(a1.ler(user01)));
 		
-		System.out.println("\n---------- Octal -----------");
-		ConversorContext octal = new ConversorContext(conversorOctal); 
-		System.out.println(octal.codificar(b1.ler(user01)));
+		
+		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE");
+		Caretaker caretaker = new Caretaker(arquivoHistorico);
+		caretaker.showMementos();
+		caretaker.backup();
+		arquivoHistorico.saveMemento();
+		caretaker.showMementos();
+		arquivoHistorico.alterarArquivo("B2", LocalDate.now(), "UM ARQUIVO ");
+		caretaker.backup();
+		arquivoHistorico.saveMemento();
+		caretaker.showMementos();
+		caretaker.undo();
+		caretaker.showMementos();
+		
+		
+//		System.out.println("\n---------- Binario -----------");
 
-		System.out.println("\n---------- Hexa -----------");
-		ConversorContext hexa = new ConversorContext(conversorHexa); 
-		System.out.println(hexa.codificar(c1.ler(user01)));
+//		ConversorContext binario = new ConversorContext(conversorBinario); 
+//		System.out.println(binario.converterString(a1.ler(user01)));
+//		
+//		System.out.println("\n---------- Octal -----------");
+//		ConversorContext octal = new ConversorContext(conversorOctal); 
+//		System.out.println(octal.codificar(b1.ler(user01)));
+//
+//		System.out.println("\n---------- Hexa -----------");
+//		ConversorContext hexa = new ConversorContext(conversorHexa); 
+//		System.out.println(hexa.codificar(c1.ler(user01)));
 		
 
 //		try {
