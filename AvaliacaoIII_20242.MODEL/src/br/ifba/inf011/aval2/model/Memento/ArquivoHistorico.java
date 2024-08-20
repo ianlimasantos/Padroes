@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import br.ifba.inf011.aval2.model.Arquivo;
 import br.ifba.inf011.aval2.model.EntradaOperavel;
+import br.ifba.inf011.aval2.model.Stratagy.ConversorStrategy;
 
 
 public class ArquivoHistorico extends Arquivo implements EntradaOperavel{ 
@@ -13,8 +14,8 @@ public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 //	private String conteudo;
 	
 
-	public ArquivoHistorico(String nome, LocalDate dataCriacao, String conteudo) {
-		super(nome, dataCriacao, conteudo);
+	public ArquivoHistorico(String nome, LocalDate dataCriacao, String conteudo, ConversorStrategy tipoCodificacao) {
+		super(nome, dataCriacao, conteudo, tipoCodificacao);
 	}
 	
 	public ConcreteMemento saveMemento() {
@@ -27,16 +28,15 @@ public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 	            this.setNome(concreteMemento.getNome());
 	            this.setConteudo(concreteMemento.getconteudo());
 	            this.setDataCriacao(concreteMemento.getData());
-	            System.out.println("Conteudo: " + getConteudo());
+	            System.out.println("Conteudo:" + concreteMemento.getconteudo());
 	        }
 		 
 
 	}
 	
-	public void alterarArquivo(String nome, LocalDate data, String conteudo) {
+	public void alterarArquivo(String nome, String conteudo) {
 	    super.setNome(nome);
-	    super.setDataCriacao(data);
 	    super.setConteudo(conteudo);
-	  }
+	}
 	
 }

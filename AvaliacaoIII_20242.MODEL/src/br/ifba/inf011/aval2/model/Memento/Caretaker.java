@@ -30,9 +30,13 @@ public class Caretaker {
 
 	   
 	    public void showMementos() {
-	        for (MementoInterface memento : mementos) {
-	            System.out.println(memento.getNome() + " " + memento.getData());
-	        }
+	    	if(mementos.isEmpty())
+	    		System.out.println("Não há mementos na lista");
+	    	else {
+	    		for (MementoInterface memento : mementos) {
+		            System.out.println(memento.getNome() + " " + memento.getData());
+		        }
+	    	}
 	    }
 
 

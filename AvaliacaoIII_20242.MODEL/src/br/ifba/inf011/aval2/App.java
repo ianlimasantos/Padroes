@@ -19,10 +19,10 @@ public class App {
 	
 	
 	public void runQ1() throws IllegalAccessException  {
-		
-		EntradaOperavel a1 = new Arquivo("A1", LocalDate.now(), "00011000100011100000011111110101");
-		EntradaOperavel b1 = new Arquivo("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE");
-		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE");
+		ConversorBinario conversorBinario = new ConversorBinario();
+		EntradaOperavel a1 = new Arquivo("A1", LocalDate.now(), "00011000100011100000011111110101", conversorBinario);
+		EntradaOperavel b1 = new Arquivo("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE", conversorBinario);
+		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE", conversorBinario);
 		
 		Entrada a = new Pasta("A", LocalDate.now());
 		Entrada b = new Pasta("B", LocalDate.now());
@@ -41,25 +41,39 @@ public class App {
 		
 		
 		Credencial user01 = new Credencial("user01");
-		ConversorBinario conversorBinario = new ConversorBinario();
+		
+		System.out.println(b1.ler(user01));
+		b1.codificarConteudo();
+		System.out.println(b1.ler(user01));//
+		b1.decodificarConteudo();
+		System.out.println(b1.ler(user01));
+		
+		System.out.println("===================");
 		ConversorOctal conversorOctal = new ConversorOctal();
-		ConversorHexa conversorHexa = new ConversorHexa();
+//		ConversorHexa conversorHexa = new ConversorHexa();
+//		
+//		EstrategiaCodificacao binario = new CodificacaoBinaria();
+//        Arquivo arquivoBinario = new Arquivo(binario);
+        
 		
+		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "UM ARQUIVO DE TEXTO", conversorOctal);
+		System.out.println(arquivoHistorico.ler(user01));
+		arquivoHistorico.codificarConteudo();
 		
-		
-		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE");
+		System.out.println(arquivoHistorico.ler(user01));
 		Caretaker caretaker = new Caretaker(arquivoHistorico);
 		caretaker.showMementos();
 		caretaker.backup();
-		arquivoHistorico.saveMemento();
 		caretaker.showMementos();
-		arquivoHistorico.alterarArquivo("B2", LocalDate.now(), "UM ARQUIVO ");
+		arquivoHistorico.alterarArquivo("B2", "UM ARQUIVO ");
+		arquivoHistorico.codificarConteudo();
 		caretaker.backup();
-		arquivoHistorico.saveMemento();
 		caretaker.showMementos();
 		caretaker.undo();
 		caretaker.showMementos();
-		
+		arquivoHistorico.ler(user01);
+		caretaker.undo();
+		caretaker.showMementos();
 		
 //		System.out.println("\n---------- Binario -----------");
 
@@ -92,10 +106,9 @@ public class App {
 //		try {
 //			System.out.println("B1: " + b1.ler(user01));
 //		} catch (IllegalAccessException e) {
-//			System.out.println("NÃO FOI POSSIVEL LER DE A1");
-//		}			
-		
-		//System.out.println(raiz.getNome() + ": " + raiz.getTamanho() + "K");
+//			System.out.println("NÃO FOI POSSIVEL LER DE A1");		}			
+//		
+//		System.out.println(raiz.getNome() + ": " + raiz.getTamanho() + "K");
 	}
 	
 	
