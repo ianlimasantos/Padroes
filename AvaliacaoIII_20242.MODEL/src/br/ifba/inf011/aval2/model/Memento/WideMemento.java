@@ -2,9 +2,8 @@ package br.ifba.inf011.aval2.model.Memento;
 
 import java.time.LocalDate;
 
-public interface MementoInterface {
-	
+public interface WideMemento {
 	String getNome();
-	LocalDate getData();
-	
+	LocalDate getDataCriacao();
+	String getconteudo();
 }

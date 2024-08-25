@@ -6,37 +6,28 @@ import br.ifba.inf011.aval2.model.Arquivo;
 import br.ifba.inf011.aval2.model.EntradaOperavel;
 import br.ifba.inf011.aval2.model.Stratagy.ConversorStrategy;
 
-
-public class ArquivoHistorico extends Arquivo implements EntradaOperavel{ 
-
-//	private String nome;
-//	private LocalDate data;
-//	private String conteudo;
+//Originator
+public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 	
-
+	
 	public ArquivoHistorico(String nome, LocalDate dataCriacao, String conteudo, ConversorStrategy tipoCodificacao) {
 		super(nome, dataCriacao, conteudo, tipoCodificacao);
 	}
 	
-	public ConcreteMemento saveMemento() {
-		return new ConcreteMemento(getNome(), getDataCriacao(), getConteudo());
+	public NarrowMemento snapshot(){
+		return new Snapshot(this.getNome(), this.getDataCriacao(), this.getConteudo());
 	}
 	
-	public void restoreMemento(MementoInterface memento) {
-		 if (memento instanceof ConcreteMemento) {
-	            ConcreteMemento concreteMemento = (ConcreteMemento) memento;
-	            this.setNome(concreteMemento.getNome());
-	            this.setConteudo(concreteMemento.getconteudo());
-	            this.setDataCriacao(concreteMemento.getData());
-	            System.out.println("Conteudo:" + concreteMemento.getconteudo());
-	        }
-		 
+	
+	public void back(NarrowMemento snapshot){
+		WideMemento snap = (WideMemento) snapshot;
+		this.setNome(snap.getNome());
+		this.setDataCriacao(snap.getDataCriacao());
+	}
+	
+	public void editar(String conteudo) {
+		this.setConteudo(conteudo);
+	}
 
-	}
-	
-	public void alterarArquivo(String nome, String conteudo) {
-	    super.setNome(nome);
-	    super.setConteudo(conteudo);
-	}
 	
 }

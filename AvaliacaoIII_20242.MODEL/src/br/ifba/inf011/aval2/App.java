@@ -3,17 +3,15 @@ package br.ifba.inf011.aval2;
 import java.time.LocalDate;
 
 import br.ifba.inf011.aval2.model.Arquivo;
-import br.ifba.inf011.aval2.model.Conversor2Bin;
 import br.ifba.inf011.aval2.model.Credencial;
 import br.ifba.inf011.aval2.model.Entrada;
 import br.ifba.inf011.aval2.model.EntradaOperavel;
 import br.ifba.inf011.aval2.model.Pasta;
+import br.ifba.inf011.aval2.model.Bridge.BinaryConverter;
 import br.ifba.inf011.aval2.model.Memento.ArquivoHistorico;
 import br.ifba.inf011.aval2.model.Memento.Caretaker;
 import br.ifba.inf011.aval2.model.Stratagy.ConversorBinario;
-import br.ifba.inf011.aval2.model.Stratagy.ConversorContext;
-import br.ifba.inf011.aval2.model.Stratagy.ConversorHexa;
-import br.ifba.inf011.aval2.model.Stratagy.ConversorOctal;
+
 
 public class App {
 	
@@ -41,39 +39,56 @@ public class App {
 		
 		
 		Credencial user01 = new Credencial("user01");
-		
-		System.out.println(b1.ler(user01));
-		b1.codificarConteudo();
-		System.out.println(b1.ler(user01));//
-		b1.decodificarConteudo();
-		System.out.println(b1.ler(user01));
-		
-		System.out.println("===================");
-		ConversorOctal conversorOctal = new ConversorOctal();
+//		
+//		System.out.println(b1.ler(user01));
+//		b1.codificarConteudo();
+//		System.out.println(b1.ler(user01));//
+//		b1.decodificarConteudo();
+//		System.out.println(b1.ler(user01));
+//		
+//		System.out.println("===================");
+//		ConversorOctal conversorOctal = new ConversorOctal();
 //		ConversorHexa conversorHexa = new ConversorHexa();
 //		
 //		EstrategiaCodificacao binario = new CodificacaoBinaria();
 //        Arquivo arquivoBinario = new Arquivo(binario);
         
 		
-		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "UM ARQUIVO DE TEXTO", conversorOctal);
-		System.out.println(arquivoHistorico.ler(user01));
-		arquivoHistorico.codificarConteudo();
-		
-		System.out.println(arquivoHistorico.ler(user01));
+		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "Criei assim", conversorBinario);
+
 		Caretaker caretaker = new Caretaker(arquivoHistorico);
-		caretaker.showMementos();
-		caretaker.backup();
-		caretaker.showMementos();
-		arquivoHistorico.alterarArquivo("B2", "UM ARQUIVO ");
-		arquivoHistorico.codificarConteudo();
-		caretaker.backup();
-		caretaker.showMementos();
+		
+		BinaryConverter binaryConverter = new BinaryConverter();
+	
+		caretaker.save();
+		System.out.println("-------");
+		caretaker.showSnaps();
+		arquivoHistorico.editar("Editei uma vez");
+		caretaker.save();
+		arquivoHistorico.editar(binaryConverter.codificarConteudo(arquivoHistorico)); 
+		System.out.println("-------");
+		caretaker.save();
+		caretaker.showSnaps();
+		arquivoHistorico.editar(binaryConverter.decodificarConteudo(arquivoHistorico));
+		System.out.println("-------");
+		caretaker.save();
+		caretaker.showSnaps();
+		arquivoHistorico.editar("Editei pela segunda vez");
+		caretaker.save();
+		System.out.println("APOS SAVE");
+		caretaker.showSnaps();
 		caretaker.undo();
-		caretaker.showMementos();
-		arquivoHistorico.ler(user01);
+		System.out.println("-------");
+		caretaker.showSnaps();
 		caretaker.undo();
-		caretaker.showMementos();
+		System.out.println("-------");
+		caretaker.showSnaps();
+		caretaker.undo();
+		System.out.println("-------");
+		caretaker.showSnaps();
+		
+		//caretaker.undo();
+		System.out.println("------------");
 		
 //		System.out.println("\n---------- Binario -----------");
 
