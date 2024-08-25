@@ -10,8 +10,8 @@ import br.ifba.inf011.aval2.model.Stratagy.ConversorStrategy;
 public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 	
 	
-	public ArquivoHistorico(String nome, LocalDate dataCriacao, String conteudo, ConversorStrategy tipoCodificacao) {
-		super(nome, dataCriacao, conteudo, tipoCodificacao);
+	public ArquivoHistorico(String nome, LocalDate dataCriacao, String conteudo) {
+		super(nome, dataCriacao, conteudo);
 	}
 	
 	public NarrowMemento snapshot(){
@@ -25,9 +25,5 @@ public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 		this.setDataCriacao(snap.getDataCriacao());
 	}
 	
-	public void editar(String conteudo) {
-		this.setConteudo(conteudo);
-	}
-
 	
 }

@@ -2,6 +2,8 @@ package br.ifba.inf011.aval2;
 
 import java.time.LocalDate;
 
+import javax.naming.OperationNotSupportedException;
+
 import br.ifba.inf011.aval2.model.Arquivo;
 import br.ifba.inf011.aval2.model.Credencial;
 import br.ifba.inf011.aval2.model.Entrada;
@@ -18,9 +20,9 @@ public class App {
 	
 	public void runQ1() throws IllegalAccessException  {
 		ConversorBinario conversorBinario = new ConversorBinario();
-		EntradaOperavel a1 = new Arquivo("A1", LocalDate.now(), "00011000100011100000011111110101", conversorBinario);
-		EntradaOperavel b1 = new Arquivo("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE", conversorBinario);
-		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE", conversorBinario);
+		EntradaOperavel a1 = new Arquivo("A1", LocalDate.now(), "00011000100011100000011111110101");
+		EntradaOperavel b1 = new Arquivo("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE");
+		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE");
 		
 		Entrada a = new Pasta("A", LocalDate.now());
 		Entrada b = new Pasta("B", LocalDate.now());
@@ -54,7 +56,7 @@ public class App {
 //        Arquivo arquivoBinario = new Arquivo(binario);
         
 		
-		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "Criei assim", conversorBinario);
+		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "Criei assim");
 
 		Caretaker caretaker = new Caretaker(arquivoHistorico);
 		
@@ -63,33 +65,48 @@ public class App {
 		caretaker.save();
 		System.out.println("-------");
 		caretaker.showSnaps();
-		arquivoHistorico.editar("Editei uma vez");
+		System.out.println("-------");
+		arquivoHistorico.bloquear();
+		//arquivoHistorico.liberar();
+		try {
+			arquivoHistorico.escrever(user01, "Editei a primeira vez");
+		}catch(IllegalAccessException e) {
+			System.out.println("No Estado Atual da Mensagem, o Conteudo Não pode Ser Modificado");
+		}
 		caretaker.save();
-		arquivoHistorico.editar(binaryConverter.codificarConteudo(arquivoHistorico)); 
 		System.out.println("-------");
+		caretaker.showSnaps();
+		arquivoHistorico.liberar();
+		arquivoHistorico.escrever(user01, "Editei a terceira vez");
 		caretaker.save();
-		caretaker.showSnaps();
-		arquivoHistorico.editar(binaryConverter.decodificarConteudo(arquivoHistorico));
-		System.out.println("-------");
-		caretaker.save();
-		caretaker.showSnaps();
-		arquivoHistorico.editar("Editei pela segunda vez");
-		caretaker.save();
-		System.out.println("APOS SAVE");
-		caretaker.showSnaps();
-		caretaker.undo();
 		System.out.println("-------");
 		caretaker.showSnaps();
-		caretaker.undo();
-		System.out.println("-------");
-		caretaker.showSnaps();
-		caretaker.undo();
-		System.out.println("-------");
-		caretaker.showSnaps();
-		
-		//caretaker.undo();
-		System.out.println("------------");
-		
+//		caretaker.save();
+//		arquivoHistorico.escrever(user01, binaryConverter.codificarConteudo(arquivoHistorico));
+//		System.out.println("-------");
+//		caretaker.save();
+//		caretaker.showSnaps();
+//		arquivoHistorico.escrever(user01, binaryConverter.decodificarConteudo(arquivoHistorico));
+//		System.out.println("-------");
+//		caretaker.save();
+//		caretaker.showSnaps();
+//		arquivoHistorico.escrever(user01, "Editei a segunda vez");
+//		caretaker.save();
+//		System.out.println("APOS SAVE");
+//		caretaker.showSnaps();
+//		caretaker.undo();
+//		System.out.println("-------");
+//		caretaker.showSnaps();
+//		caretaker.undo();
+//		System.out.println("-------");
+//		caretaker.showSnaps();
+//		caretaker.undo();
+//		System.out.println("-------");
+//		caretaker.showSnaps();
+//		
+//		//caretaker.undo();
+//		System.out.println("------------");
+//		
 //		System.out.println("\n---------- Binario -----------");
 
 //		ConversorContext binario = new ConversorContext(conversorBinario); 

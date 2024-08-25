@@ -80,14 +80,4 @@ public class LogOperacaoProxy implements EntradaOperavel{
 		return this.arquivo.dump();
 	}
 
-	@Override
-	public void codificarConteudo() {
-		this.arquivo.codificarConteudo();
-	}
-
-	@Override
-	public void decodificarConteudo() {
-		this.arquivo.decodificarConteudo();
-	}
-
 }

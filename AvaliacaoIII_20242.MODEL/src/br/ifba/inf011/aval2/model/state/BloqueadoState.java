@@ -5,13 +5,7 @@ import javax.naming.OperationNotSupportedException;
 public class BloqueadoState extends AbstractArquivoState implements ArquivoState {
 
 	@Override
-	public String setConteudo(String conteudo) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArquivoState liberar() throws OperationNotSupportedException {
+	public ArquivoState liberar() throws IllegalAccessException {
 		// TODO Auto-generated method stub
 		return new NormalState();
 	}

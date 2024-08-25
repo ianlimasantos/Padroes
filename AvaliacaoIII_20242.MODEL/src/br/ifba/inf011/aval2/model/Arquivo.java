@@ -2,19 +2,21 @@ package br.ifba.inf011.aval2.model;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import br.ifba.inf011.aval2.model.Stratagy.ConversorStrategy;
+import javax.naming.OperationNotSupportedException;
 import br.ifba.inf011.aval2.model.composite.AbstractEntrada;
+import br.ifba.inf011.aval2.model.state.ArquivoState;
+import br.ifba.inf011.aval2.model.state.NormalState;
+
 
 public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	
+	private ArquivoState state;
 	private String conteudo;
-	ConversorStrategy tipoCodificacao;
 
-	public Arquivo(String nome, LocalDate dataCriacao, String conteudo, ConversorStrategy tipoCodificacao) {
+	public Arquivo(String nome, LocalDate dataCriacao, String conteudo) {
 		super(nome, dataCriacao);
-		this.conteudo =  conteudo;
-		this.tipoCodificacao = tipoCodificacao; 
+		this.conteudo =  conteudo; 
+		this.state = new NormalState();
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 
 	@Override
 	public void escrever(Credencial credencial, String conteudo) throws IllegalAccessException {
-		this.conteudo = conteudo; 
+		this.conteudo = this.state.setConteudo(conteudo); 
 	}
 
 	@Override
@@ -60,16 +62,21 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 		this.conteudo = conteudo;
 	}
 	
-	public void setCodificacao(ConversorStrategy conversorStrategy) {
-        this.tipoCodificacao = conversorStrategy;
-    }
+	public void liberar() throws IllegalAccessException {
+		this.state = this.state.liberar();
+	}
 	
-	public void codificarConteudo() {
-        this.conteudo = this.tipoCodificacao.codificar(this.conteudo);
-    }
-
-    // Método para decodificar o conteúdo
-    public void decodificarConteudo() {
-        this.conteudo = this.tipoCodificacao.converterString(this.conteudo);
-    }
+	public void bloquear() throws IllegalAccessException{	
+		this.state = this.state.bloquear();
+	}
+	public void restaurar() throws IllegalAccessException{
+		this.state = this.state.restaurar();
+	}
+	public void excluir() throws IllegalAccessException{
+		this.state = this.state.bloquear();
+	}
+	public void somenteLeitura() throws IllegalAccessException{
+		this.state = this.state.somenteLeitura();
+	}
+	
 }

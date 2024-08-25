@@ -5,14 +5,14 @@ import javax.naming.OperationNotSupportedException;
 public class ExcluidoState extends AbstractArquivoState implements ArquivoState {
 
 	@Override
-	public String setConteudo(String conteudo) throws OperationNotSupportedException {
+	public String setConteudo(String conteudo) throws IllegalAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public ArquivoState restaurar() throws OperationNotSupportedException {
+	public ArquivoState restaurar() throws IllegalAccessException {
 		// TODO Auto-generated method stub
 		return new NormalState();
 	}

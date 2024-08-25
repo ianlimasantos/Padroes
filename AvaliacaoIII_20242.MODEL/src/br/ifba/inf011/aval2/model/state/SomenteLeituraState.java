@@ -5,19 +5,19 @@ import javax.naming.OperationNotSupportedException;
 public class SomenteLeituraState extends AbstractArquivoState implements ArquivoState {
 
 	@Override
-	public String setConteudo(String conteudo) throws OperationNotSupportedException {
+	public String setConteudo(String conteudo) throws IllegalAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ArquivoState liberar() throws OperationNotSupportedException {
+	public ArquivoState liberar() throws IllegalAccessException {
 		// TODO Auto-generated method stub
 		return new NormalState();
 	}
 
 	@Override
-	public ArquivoState bloquear() throws OperationNotSupportedException {
+	public ArquivoState bloquear() throws IllegalAccessException {
 		// TODO Auto-generated method stub
 		return new BloqueadoState();
 	}

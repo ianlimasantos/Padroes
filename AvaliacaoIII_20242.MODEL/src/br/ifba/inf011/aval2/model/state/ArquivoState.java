@@ -7,13 +7,13 @@ import javax.naming.OperationNotSupportedException;
 public interface ArquivoState {
 		
 	public String setConteudo(String conteudo)
-		throws OperationNotSupportedException;
+		throws IllegalAccessException;
 	
-	public ArquivoState liberar() throws OperationNotSupportedException;
-	public ArquivoState bloquear() throws OperationNotSupportedException;	
-	public ArquivoState restaurar() throws OperationNotSupportedException;
-	public ArquivoState excluir() throws OperationNotSupportedException;
-	public ArquivoState somenteLeitura() throws OperationNotSupportedException;
+	public ArquivoState liberar() throws IllegalAccessException;
+	public ArquivoState bloquear() throws IllegalAccessException;	
+	public ArquivoState restaurar() throws IllegalAccessException;
+	public ArquivoState excluir() throws IllegalAccessException;
+	public ArquivoState somenteLeitura() throws IllegalAccessException;
 	public String desc();
 	
 		
