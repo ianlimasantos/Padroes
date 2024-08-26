@@ -10,7 +10,7 @@ import br.ifba.inf011.aval2.model.state.NormalState;
 
 public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	
-	private ArquivoState state;
+	protected ArquivoState state;
 	private String conteudo;
 
 	public Arquivo(String nome, LocalDate dataCriacao, String conteudo) {
@@ -73,7 +73,7 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 		this.state = this.state.restaurar();
 	}
 	public void excluir() throws IllegalAccessException{
-		this.state = this.state.bloquear();
+		this.state = this.state.excluir();
 	}
 	public void somenteLeitura() throws IllegalAccessException{
 		this.state = this.state.somenteLeitura();

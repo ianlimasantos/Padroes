@@ -17,11 +17,13 @@ public class Caretaker {
 		this.snaps.push(snap);
 	}
 	
-	public void undo() {
+	public void undo() throws IllegalAccessException {
 		if(this.snaps.empty())
 			return;
 		NarrowMemento snap = this.snaps.pop();
-		this.arquivoHistorico.back(snap);
+		if (this.arquivoHistorico.back(snap) == false) {
+			this.snaps.push(snap);
+		}
 	}
 	
 	public void showSnaps() {

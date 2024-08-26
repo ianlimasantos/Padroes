@@ -7,6 +7,7 @@ public class NormalState extends AbstractArquivoState implements ArquivoState {
 	@Override
 	public String setConteudo(String conteudo) throws IllegalAccessException {
 		// TODO Auto-generated method stub
+		desc();
 		return conteudo;
 	}
 
@@ -14,12 +15,14 @@ public class NormalState extends AbstractArquivoState implements ArquivoState {
 	@Override
 	public ArquivoState bloquear() throws IllegalAccessException {
 		// TODO Auto-generated method stub
+		System.out.println("Bloqueado");
 		return new BloqueadoState();
 	}
 
 	@Override
 	public ArquivoState excluir() throws IllegalAccessException {
 		// TODO Auto-generated method stub
+		System.out.println("Excluido");
 		return new ExcluidoState();
 	}
 

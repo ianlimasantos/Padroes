@@ -19,10 +19,15 @@ public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 	}
 	
 	
-	public void back(NarrowMemento snapshot){
+	public Boolean back(NarrowMemento snapshot) throws IllegalAccessException{
 		WideMemento snap = (WideMemento) snapshot;
-		this.setNome(snap.getNome());
-		this.setDataCriacao(snap.getDataCriacao());
+		try {
+			this.state.setConteudo(snap.getconteudo());
+			return true;
+		} catch (Exception e) {
+			return false; 
+		}
+		
 	}
 	
 	
