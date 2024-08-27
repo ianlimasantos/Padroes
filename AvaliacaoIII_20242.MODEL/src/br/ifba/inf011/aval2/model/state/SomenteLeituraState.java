@@ -1,18 +1,30 @@
 package br.ifba.inf011.aval2.model.state;
 
-import javax.naming.OperationNotSupportedException;
 
 public class SomenteLeituraState extends AbstractArquivoState implements ArquivoState {
+	
+    @Override
+	public String getConteudo(String conteudo) {
+		// TODO Auto-generated method stub
+		return conteudo;
+	}
+    
+    @Override
+    public Long getTamanho(String conteudo) {
+        return Long.valueOf(conteudo.length());
+    }
 
 	@Override
 	public ArquivoState liberar() throws IllegalAccessException {
 		// TODO Auto-generated method stub
+		System.out.println("Liberado");
 		return new NormalState();
 	}
 
 	@Override
 	public ArquivoState bloquear() throws IllegalAccessException {
 		// TODO Auto-generated method stub
+		System.out.println("Bloqueado");
 		return new BloqueadoState();
 	}
 

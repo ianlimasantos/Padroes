@@ -1,14 +1,22 @@
 package br.ifba.inf011.aval2.model.state;
 
-import javax.naming.OperationNotSupportedException;
-
 public abstract class AbstractArquivoState implements ArquivoState {
 
-	@Override
-	public String setConteudo(String conteudo) throws IllegalAccessException {
-		// TODO Auto-generated method stub
-		throw new IllegalAccessException();
-	}
+    @Override
+    public String setConteudo(String conteudo) throws IllegalAccessException {
+        // Lança exceção por padrão, pode ser sobrescrito por subclasses
+        throw new IllegalAccessException("Operação não permitida no estado atual.");
+    }
+    
+    @Override
+    public String getConteudo(String conteudo) throws IllegalAccessException {
+        throw new IllegalAccessException("Operação não permitida no estado atual.");
+    }
+    
+    @Override
+    public Long getTamanho(String conteudo)  {
+        return 0L; 
+    }
 
 	@Override
 	public ArquivoState liberar() throws IllegalAccessException {
@@ -30,7 +38,7 @@ public abstract class AbstractArquivoState implements ArquivoState {
 
 	@Override
 	public ArquivoState excluir() throws IllegalAccessException {
-		// TODO Auto-generated method stub
+		System.out.println("No estado atual o arquivo não pode mudar para esse estado");
 		return this;
 	}
 

@@ -1,9 +1,7 @@
 package br.ifba.inf011.aval2.model.state;
 
-import javax.naming.OperationNotSupportedException;
-
 public class ExcluidoState extends AbstractArquivoState implements ArquivoState {
-
+	
 	@Override
 	public ArquivoState restaurar() throws IllegalAccessException {
 		// TODO Auto-generated method stub

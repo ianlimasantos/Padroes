@@ -1,16 +1,25 @@
 package br.ifba.inf011.aval2.model.state;
 
-import javax.naming.OperationNotSupportedException;
 
 public class NormalState extends AbstractArquivoState implements ArquivoState {
 
-	@Override
-	public String setConteudo(String conteudo) throws IllegalAccessException {
+
+    @Override
+    public String setConteudo(String conteudo) {
+        // Permitir escrita normalmente no estado normal
+        return conteudo; // Retorne o conteúdo ou execute a lógica para definir o conteúdo
+    }
+
+    @Override
+	public String getConteudo(String conteudo) {
 		// TODO Auto-generated method stub
-		desc();
 		return conteudo;
 	}
-
+    
+    @Override
+    public Long getTamanho(String conteudo) {
+        return Long.valueOf(conteudo.length());
+    }
 
 	@Override
 	public ArquivoState bloquear() throws IllegalAccessException {
@@ -29,6 +38,7 @@ public class NormalState extends AbstractArquivoState implements ArquivoState {
 	@Override
 	public ArquivoState somenteLeitura() throws IllegalAccessException {
 		// TODO Auto-generated method stub
+		System.out.println("Somente Leitura");
 		return new SomenteLeituraState();
 	}
 
@@ -37,5 +47,6 @@ public class NormalState extends AbstractArquivoState implements ArquivoState {
 		// TODO Auto-generated method stub
 		return "Normal";
 	}
+
 
 }

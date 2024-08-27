@@ -7,7 +7,7 @@ import br.ifba.inf011.aval2.model.Conversor2Bin;
 
 public class BinaryConverter implements Converter {
 
-	public String decodificarConteudo(Arquivo arquivo) {
+	public String decodificarConteudo(Arquivo arquivo) throws IllegalAccessException {
 		int iCont = 0;
 		StringBuffer conteudo = new StringBuffer();
 		while(iCont * Conversor2Bin.BIN_BLOCK_SIZE < arquivo.dump().length()) {
@@ -21,7 +21,7 @@ public class BinaryConverter implements Converter {
 	}
 	
 	@Override
-	public String codificarConteudo(Arquivo arquivo) {
+	public String codificarConteudo(Arquivo arquivo) throws IllegalAccessException {
 		StringBuffer arquivoConvertido = new StringBuffer();		
 		for(int iCont = 0; iCont < arquivo.dump().length(); iCont++)
 			arquivoConvertido.append(this.toBin(arquivo.dump().charAt(iCont)));

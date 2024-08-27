@@ -21,8 +21,8 @@ public class App {
 	public void runQ1() throws IllegalAccessException  {
 		EntradaOperavel a1 = new Arquivo("A1", LocalDate.now(), "00011000100011100000011111110101");
 		EntradaOperavel b1 = new Arquivo("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE");
-		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE");
-		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "Criei assim");
+		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE"); //76k
+		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "Criei assim"); //87k
 
 		Credencial user01 = new Credencial("user01");
 		
@@ -45,37 +45,66 @@ public class App {
 		c.addFilho(c1);
 		c.addFilho(arquivoHistorico);
 	
-		caretaker.save();
-		System.out.println("-------");
-		caretaker.showSnaps();
-		System.out.println("-------");
-		arquivoHistorico.excluir();
-		arquivoHistorico.restaurar();
 		
-		try {
-			arquivoHistorico.escrever(user01, "aaaaaaaaaaaaaaaaaaa");
-		}catch(IllegalAccessException e) {
-			System.out.println("No Estado Atual da Mensagem, o Conteudo Não pode Ser Modificado");
-		}
-		caretaker.save();
-		System.out.println("-------");
-		caretaker.showSnaps();
-		arquivoHistorico.escrever(user01, "A"); //77k 
-		caretaker.save();
-		arquivoHistorico.escrever(user01, binaryConverter.codificarConteudo(arquivoHistorico)); //84k
-		caretaker.save();
-		System.out.println("-------");
-		caretaker.showSnaps();
+		arquivoHistorico.somenteLeitura(); // 87k
 		arquivoHistorico.bloquear();
-		arquivoHistorico.liberar();
-		try {
-			caretaker.undo();
-		}catch(IllegalAccessException e) {
-			System.out.println("No Estado Atual da Mensagem, o Conteudo Não pode Ser Modificado");
-		}
-		System.out.println("-------");
+		//caretaker.save();
 		caretaker.showSnaps();
-		caretaker.undo();
+		arquivoHistorico.excluir();
+		arquivoHistorico.liberar();
+		caretaker.save();
+		arquivoHistorico.escrever(user01, "editei");
+		caretaker.showSnaps();
+		arquivoHistorico.excluir(); //76k
+//		caretaker.showSnaps();
+//		arquivoHistorico.liberar();
+//		caretaker.save();
+//		arquivoHistorico.restaurar(); //87k
+		
+		//arquivoHistorico.escrever(user01, "aaa"); //79k
+		//System.out.println(arquivoHistorico.ler(user01));
+		//arquivoHistorico.restaurar();
+		//System.out.println(arquivoHistorico.ler(user01));
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		
+//		try {
+//			arquivoHistorico.escrever(user01, "aaaaaaaaaaaaaaaaaaa");
+//		}catch(IllegalAccessException e) {
+//			System.out.println("No Estado Atual da Mensagem, o Conteudo Não pode Ser Modificado");
+//		}
+//		caretaker.save();
+//		System.out.println("-------");
+//		caretaker.showSnaps();
+//		arquivoHistorico.escrever(user01, "A"); //77k 
+//		caretaker.save();
+//		arquivoHistorico.escrever(user01, binaryConverter.codificarConteudo(arquivoHistorico)); //84k
+//		caretaker.save();
+//		System.out.println("-------");
+//		caretaker.showSnaps();
+//		arquivoHistorico.bloquear();
+//		arquivoHistorico.liberar();
+//		try {
+//			caretaker.undo();
+//		}catch(IllegalAccessException e) {
+//			System.out.println("No Estado Atual da Mensagem, o Conteudo Não pode Ser Modificado");
+//		}
+//		System.out.println("-------");
+//		caretaker.showSnaps();
+//		caretaker.undo();
 
 		try {
 			b1.escrever(user01, "CINCO");

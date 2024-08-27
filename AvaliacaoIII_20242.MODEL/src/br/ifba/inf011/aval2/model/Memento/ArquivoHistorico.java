@@ -14,7 +14,7 @@ public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 		super(nome, dataCriacao, conteudo);
 	}
 	
-	public NarrowMemento snapshot(){
+	public NarrowMemento snapshot() throws IllegalAccessException{
 		return new Snapshot(this.getNome(), this.getDataCriacao(), this.getConteudo());
 	}
 	

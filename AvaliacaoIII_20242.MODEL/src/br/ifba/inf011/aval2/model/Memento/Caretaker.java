@@ -12,7 +12,7 @@ public class Caretaker {
 		this.arquivoHistorico = arquivoHistorico;
 	}
 	
-	public void save() {
+	public void save() throws IllegalAccessException {
 		NarrowMemento snap = this.arquivoHistorico.snapshot();
 		this.snaps.push(snap);
 	}
