@@ -3,6 +3,8 @@ package br.ifba.inf011.aval2.model;
 import java.time.LocalDate;
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
+
+import br.ifba.inf011.aval2.model.Bridge.Converter;
 import br.ifba.inf011.aval2.model.composite.AbstractEntrada;
 import br.ifba.inf011.aval2.model.state.ArquivoState;
 import br.ifba.inf011.aval2.model.state.NormalState;
@@ -12,10 +14,12 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	
 	protected ArquivoState state;
 	private String conteudo;
+	private Converter tipoDeCodificacao;
 
-	public Arquivo(String nome, LocalDate dataCriacao, String conteudo) {
+	public Arquivo(String nome, LocalDate dataCriacao, String conteudo, Converter tipoDeCodificacao) {
 		super(nome, dataCriacao);
 		this.conteudo =  conteudo; 
+		this.tipoDeCodificacao = tipoDeCodificacao; 
 		this.state = new NormalState();
 	}
 
@@ -51,7 +55,7 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 
 	@Override
 	public String dump() throws IllegalAccessException{
-		return this.state.getConteudo(conteudo);
+		return tipoDeCodificacao.codificarConteudo(this.state.getConteudo(conteudo));
 	};
 
 	protected String getConteudo() throws IllegalAccessException {

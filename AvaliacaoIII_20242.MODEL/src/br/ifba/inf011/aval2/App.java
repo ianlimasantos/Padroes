@@ -19,15 +19,15 @@ public class App {
 	
 	
 	public void runQ1() throws IllegalAccessException  {
-		EntradaOperavel a1 = new Arquivo("A1", LocalDate.now(), "00011000100011100000011111110101");
-		EntradaOperavel b1 = new Arquivo("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE");
-		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE"); //76k
-		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "Criei assim"); //87k
+		BinaryConverter binaryConverter = new BinaryConverter();
+		EntradaOperavel a1 = new Arquivo("A1", LocalDate.now(), "00011000100011100000011111110101", binaryConverter);
+		EntradaOperavel b1 = new Arquivo("B1", LocalDate.now(), "UM ARQUIVO TAMANHO GRANDE", binaryConverter);
+		EntradaOperavel c1 = new Arquivo("C1", LocalDate.now(), "UM ARQUIVO TAMANHO MUITO MUITO GRANDE", binaryConverter); //76k
 
 		Credencial user01 = new Credencial("user01");
 		
+		ArquivoHistorico arquivoHistorico = new ArquivoHistorico("B1", LocalDate.now(), "Criei assim", binaryConverter); //87k
 		Caretaker caretaker = new Caretaker(arquivoHistorico);
-		BinaryConverter binaryConverter = new BinaryConverter();
 		
 		Entrada a = new Pasta("A", LocalDate.now());
 		Entrada b = new Pasta("B", LocalDate.now());
@@ -45,17 +45,39 @@ public class App {
 		c.addFilho(c1);
 		c.addFilho(arquivoHistorico);
 	
-		
-		arquivoHistorico.somenteLeitura(); // 87k
-		arquivoHistorico.bloquear();
-		//caretaker.save();
-		caretaker.showSnaps();
-		arquivoHistorico.excluir();
-		arquivoHistorico.liberar();
+//		System.out.println(arquivoHistorico.ler(user01));
+//		System.out.println(arquivoHistorico.dump());
 		caretaker.save();
-		arquivoHistorico.escrever(user01, "editei");
+		arquivoHistorico.bloquear(); // 87k
+		try {
+			System.out.println(arquivoHistorico.ler(user01));
+			System.out.println(arquivoHistorico.dump());
+			arquivoHistorico.escrever(user01, "aaa"); //79k
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		arquivoHistorico.liberar();
+		try {
+			System.out.println(arquivoHistorico.ler(user01));
+			System.out.println(arquivoHistorico.dump());
+			arquivoHistorico.escrever(user01, "aaa"); //79k
+			System.out.println(arquivoHistorico.ler(user01));
+			System.out.println(arquivoHistorico.dump());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		caretaker.save();
 		caretaker.showSnaps();
-		arquivoHistorico.excluir(); //76k
+//		arquivoHistorico.bloquear();
+//		//caretaker.save();
+//		caretaker.showSnaps();
+//		arquivoHistorico.excluir();
+//		arquivoHistorico.liberar();
+//		caretaker.save();
+//		arquivoHistorico.escrever(user01, "editei");
+//		caretaker.showSnaps();
+//		arquivoHistorico.excluir(); //76k
 //		caretaker.showSnaps();
 //		arquivoHistorico.liberar();
 //		caretaker.save();

@@ -4,14 +4,15 @@ import java.time.LocalDate;
 
 import br.ifba.inf011.aval2.model.Arquivo;
 import br.ifba.inf011.aval2.model.EntradaOperavel;
+import br.ifba.inf011.aval2.model.Bridge.Converter;
 import br.ifba.inf011.aval2.model.Stratagy.ConversorStrategy;
 
 //Originator
 public class ArquivoHistorico extends Arquivo implements EntradaOperavel{
 	
 	
-	public ArquivoHistorico(String nome, LocalDate dataCriacao, String conteudo) {
-		super(nome, dataCriacao, conteudo);
+	public ArquivoHistorico(String nome, LocalDate dataCriacao, String conteudo, Converter tipoDeCodificacao) {
+		super(nome, dataCriacao, conteudo, tipoDeCodificacao);
 	}
 	
 	public NarrowMemento snapshot() throws IllegalAccessException{
