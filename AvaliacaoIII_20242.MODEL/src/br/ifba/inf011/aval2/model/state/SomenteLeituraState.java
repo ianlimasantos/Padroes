@@ -2,14 +2,14 @@ package br.ifba.inf011.aval2.model.state;
 
 
 public class SomenteLeituraState extends AbstractArquivoState implements ArquivoState {
-	
-    @Override
+	 
+	@Override
 	public String getConteudo(String conteudo) {
 		// TODO Auto-generated method stub
 		return conteudo;
 	}
-    
-    @Override
+	
+	@Override
     public Long getTamanho(String conteudo) {
         return Long.valueOf(conteudo.length());
     }

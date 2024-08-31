@@ -18,7 +18,7 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 
 	public Arquivo(String nome, LocalDate dataCriacao, String conteudo, Converter tipoDeCodificacao) {
 		super(nome, dataCriacao);
-		this.conteudo =  conteudo; 
+		this.conteudo =  tipoDeCodificacao.codificarConteudo(conteudo); 
 		this.tipoDeCodificacao = tipoDeCodificacao; 
 		this.state = new NormalState();
 	}
@@ -45,22 +45,18 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	
 	@Override
 	public String ler(Credencial credencial) throws IllegalAccessException{
-		return this.state.getConteudo(conteudo);
+		return tipoDeCodificacao.decodificarConteudo(this.state.getConteudo(this.conteudo));
 	}
 
 	@Override
 	public void escrever(Credencial credencial, String conteudo) throws IllegalAccessException {
-		this.conteudo = this.state.setConteudo(conteudo); 
+		this.conteudo = tipoDeCodificacao.codificarConteudo(this.state.setConteudo(conteudo));
 	}
 
 	@Override
 	public String dump() throws IllegalAccessException{
-		return tipoDeCodificacao.codificarConteudo(this.state.getConteudo(conteudo));
+		return this.conteudo;
 	};
-
-	protected String getConteudo() throws IllegalAccessException {
-		return  this.state.getConteudo(conteudo);
-	}
 	
 	protected void setConteudo(String conteudo) {
 		this.conteudo = conteudo;

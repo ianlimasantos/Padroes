@@ -3,18 +3,16 @@ package br.ifba.inf011.aval2.model.state;
 
 public class NormalState extends AbstractArquivoState implements ArquivoState {
 
-
-    @Override
-    public String setConteudo(String conteudo) {
-        // Permitir escrita normalmente no estado normal
-        return conteudo; // Retorne o conteúdo ou execute a lógica para definir o conteúdo
-    }
-
-    @Override
+	@Override
 	public String getConteudo(String conteudo) {
 		// TODO Auto-generated method stub
 		return conteudo;
 	}
+	
+    @Override
+    public String setConteudo(String conteudo) {
+        return conteudo;
+    }
     
     @Override
     public Long getTamanho(String conteudo) {

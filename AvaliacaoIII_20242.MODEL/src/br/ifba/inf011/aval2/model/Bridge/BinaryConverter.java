@@ -7,14 +7,14 @@ import br.ifba.inf011.aval2.model.Conversor2Bin;
 
 public class BinaryConverter implements Converter {
 
-	public static int BIN_BLOCK_SIZE = 8;
+public static int BIN_BLOCK_SIZE = 8;
 	
 	public String decodificarConteudo(String binary) {
 		int iCont = 0;
 		StringBuffer conteudo = new StringBuffer();
-		while(iCont * BinaryConverter.BIN_BLOCK_SIZE < binary.length()) {
-			int inicio = iCont * BinaryConverter.BIN_BLOCK_SIZE;
-			int fim = (iCont + 1) * BinaryConverter.BIN_BLOCK_SIZE;
+		while(iCont * Conversor2Bin.BIN_BLOCK_SIZE < binary.length()) {
+			int inicio = iCont * Conversor2Bin.BIN_BLOCK_SIZE;
+			int fim = (iCont + 1) * Conversor2Bin.BIN_BLOCK_SIZE;
 			String value = binary.substring(inicio, fim);
 			conteudo.append(this.toChar(value));
 			iCont++;
