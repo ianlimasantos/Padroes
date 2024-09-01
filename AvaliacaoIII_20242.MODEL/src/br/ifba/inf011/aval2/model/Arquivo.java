@@ -3,6 +3,8 @@ package br.ifba.inf011.aval2.model;
 import java.time.LocalDate;
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
+
+import br.ifba.inf011.aval2.model.Bridge.Converter;
 import br.ifba.inf011.aval2.model.composite.AbstractEntrada;
 import br.ifba.inf011.aval2.model.state.ArquivoState;
 import br.ifba.inf011.aval2.model.state.NormalState;
@@ -12,10 +14,12 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	
 	protected ArquivoState state;
 	private String conteudo;
+	private Converter tipoDeCodificacao;
 
-	public Arquivo(String nome, LocalDate dataCriacao, String conteudo) {
+	public Arquivo(String nome, LocalDate dataCriacao, String conteudo, Converter tipoDeCodificacao) {
 		super(nome, dataCriacao);
-		this.conteudo =  conteudo; 
+		this.conteudo =  tipoDeCodificacao.codificarConteudo(conteudo); 
+		this.tipoDeCodificacao = tipoDeCodificacao; 
 		this.state = new NormalState();
 	}
 
@@ -35,28 +39,26 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	}
 
 	@Override
-	public Long getTamanho() throws IllegalAccessException{
-		return Long.valueOf(this.conteudo.length());
+	public Long getTamanho() throws IllegalAccessException {
+		return Long.valueOf(this.state.getTamanho(conteudo));
 	}
 	
 	@Override
 	public String ler(Credencial credencial) throws IllegalAccessException{
-		return this.conteudo;
+		System.out.println(tipoDeCodificacao.decodificarConteudo(this.state.getConteudo(this.conteudo))); /// Apenas para mostrar o conteudo no cliente
+		return tipoDeCodificacao.decodificarConteudo(this.state.getConteudo(this.conteudo));
 	}
 
 	@Override
 	public void escrever(Credencial credencial, String conteudo) throws IllegalAccessException {
-		this.conteudo = this.state.setConteudo(conteudo); 
+		this.conteudo = tipoDeCodificacao.codificarConteudo(this.state.setConteudo(conteudo));
 	}
 
 	@Override
-	public String dump(){
+	public String dump() throws IllegalAccessException{
+		System.out.println(this.conteudo); // Apenas para mostrar o conteudo no cliente
 		return this.conteudo;
 	};
-
-	protected String getConteudo() {
-		return conteudo;
-	}
 	
 	protected void setConteudo(String conteudo) {
 		this.conteudo = conteudo;
@@ -75,6 +77,7 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	public void excluir() throws IllegalAccessException{
 		this.state = this.state.excluir();
 	}
+	
 	public void somenteLeitura() throws IllegalAccessException{
 		this.state = this.state.somenteLeitura();
 	}

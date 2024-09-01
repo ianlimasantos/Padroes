@@ -1,8 +1,11 @@
 package br.ifba.inf011.aval2.model.state;
 
-import javax.naming.OperationNotSupportedException;
-
 public class BloqueadoState extends AbstractArquivoState implements ArquivoState {
+	
+	@Override
+    public Long getTamanho(String conteudo) {
+        return Long.valueOf(conteudo.length());
+    }
 
 	@Override
 	public ArquivoState liberar() throws IllegalAccessException {
@@ -11,9 +14,8 @@ public class BloqueadoState extends AbstractArquivoState implements ArquivoState
 	}
 
 	@Override
-	public String desc() {
-		// TODO Auto-generated method stub
-		return "Bloqueado";
+	public void desc() {
+		System.out.println("Estado do Arquivo Bloqueado");
 	}
 
 }
