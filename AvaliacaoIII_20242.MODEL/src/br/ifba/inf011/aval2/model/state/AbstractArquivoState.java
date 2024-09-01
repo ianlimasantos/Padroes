@@ -1,6 +1,10 @@
 package br.ifba.inf011.aval2.model.state;
 
 public abstract class AbstractArquivoState implements ArquivoState {
+	
+	public AbstractArquivoState() {
+		desc();
+	}
 
     @Override
     public String setConteudo(String conteudo) throws IllegalAccessException {
@@ -49,9 +53,8 @@ public abstract class AbstractArquivoState implements ArquivoState {
 	}
 
 	@Override
-	public String desc() {
+	public void desc() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

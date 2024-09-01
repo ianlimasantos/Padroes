@@ -45,6 +45,7 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 	
 	@Override
 	public String ler(Credencial credencial) throws IllegalAccessException{
+		System.out.println(tipoDeCodificacao.decodificarConteudo(this.state.getConteudo(this.conteudo))); /// Apenas para mostrar o conteudo no cliente
 		return tipoDeCodificacao.decodificarConteudo(this.state.getConteudo(this.conteudo));
 	}
 
@@ -55,6 +56,7 @@ public class Arquivo extends AbstractEntrada implements EntradaOperavel{
 
 	@Override
 	public String dump() throws IllegalAccessException{
+		System.out.println(this.conteudo); // Apenas para mostrar o conteudo no cliente
 		return this.conteudo;
 	};
 	

@@ -11,7 +11,7 @@ public interface ArquivoState {
 	public ArquivoState restaurar() throws IllegalAccessException;
 	public ArquivoState excluir() throws IllegalAccessException;
 	public ArquivoState somenteLeitura() throws IllegalAccessException;
-	public String desc();
+	public void desc();
 
 }
 

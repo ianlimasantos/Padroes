@@ -10,14 +10,12 @@ public class BloqueadoState extends AbstractArquivoState implements ArquivoState
 	@Override
 	public ArquivoState liberar() throws IllegalAccessException {
 		// TODO Auto-generated method stub
-		System.out.println("Liberado");
 		return new NormalState();
 	}
 
 	@Override
-	public String desc() {
-		// TODO Auto-generated method stub
-		return "Bloqueado";
+	public void desc() {
+		System.out.println("Estado do Arquivo Bloqueado");
 	}
 
 }

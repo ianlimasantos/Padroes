@@ -10,20 +10,8 @@ public class Snapshot implements WideMemento, NarrowMemento{
 	private LocalDate dataCriacao;
 	private String conteudo; 
 	
-	public Snapshot(String nome, LocalDate dataCriacao, String conteudo) {
-		this.nome = nome;
-		this.dataCriacao = dataCriacao;
+	public Snapshot(String conteudo) {
 		this.conteudo = conteudo;
-	}
-
-	@Override
-	public String getNome() {
-		return nome;
-	}
-
-	@Override
-	public LocalDate getDataCriacao() {
-		return dataCriacao;
 	}
 
 	@Override
@@ -32,7 +20,7 @@ public class Snapshot implements WideMemento, NarrowMemento{
 	}
 	
 	public String toString() {
-	    return "Snapshot [Nome = " + this.nome + ", Data = " + this.dataCriacao + " Conteudo = " + this.conteudo + "]";
+	    return "Snapshot [Conteudo = " + this.conteudo + "]" ;
 	}
 
 

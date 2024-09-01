@@ -17,21 +17,18 @@ public class SomenteLeituraState extends AbstractArquivoState implements Arquivo
 	@Override
 	public ArquivoState liberar() throws IllegalAccessException {
 		// TODO Auto-generated method stub
-		System.out.println("Liberado");
 		return new NormalState();
 	}
 
 	@Override
 	public ArquivoState bloquear() throws IllegalAccessException {
 		// TODO Auto-generated method stub
-		System.out.println("Bloqueado");
 		return new BloqueadoState();
 	}
 
 	@Override
-	public String desc() {
-		// TODO Auto-generated method stub
-		return "Somente Leitura";
+	public void desc() {
+		System.out.println("Estado do Arquivo Somente Leitura");
 	}
 
 }
